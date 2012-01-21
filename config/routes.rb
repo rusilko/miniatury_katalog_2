@@ -4,7 +4,7 @@ MiniaturyKatalog2::Application.routes.draw do
   get "static_pages/contact"
   get "static_pages/help"
 
-  root :to => 'pages#home'
+  root :to => 'static_pages#home'
   
   match '/home',    :to => 'static_pages#home'
   match '/about',   :to => 'static_pages#about'
