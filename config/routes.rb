@@ -1,17 +1,19 @@
 MiniaturyKatalog2::Application.routes.draw do
-  get "static_pages/home"
-  get "static_pages/about"
-  get "static_pages/contact"
-  get "static_pages/help"
-
-  root :to => 'static_pages#home'
   
-  match '/home',    :to => 'static_pages#home'
-  match '/about',   :to => 'static_pages#about'
-  match '/help',    :to => 'static_pages#help'
-  match '/contact', :to => 'static_pages#contact'
+  get "users/new"
 
-  match '/signup', :to => 'users#new'
+  #named routes
+  #match '/xxx', to: 'controller#action'
+  #xxx_path => '/xxx'
+  #xxx_url => 'http://localhost:3000/xxx'
+
+  root              to: 'static_pages#home'
+  match '/home',    to: 'static_pages#home'
+  match '/about',   to: 'static_pages#about'
+  match '/help',    to: 'static_pages#help'
+  match '/contact', to: 'static_pages#contact'
+  match '/signup',  to: 'users#new'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -61,7 +63,7 @@ MiniaturyKatalog2::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  # root to:  'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
