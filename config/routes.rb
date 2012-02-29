@@ -1,7 +1,6 @@
 MiniaturyKatalog2::Application.routes.draw do
+  resources :users
   
-  get "users/new"
-
   #named routes
   #match '/xxx', to: 'controller#action'
   #xxx_path => '/xxx'
