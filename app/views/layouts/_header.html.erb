@@ -1,7 +1,7 @@
 <div class="topbar">
   <div class="topbar-inner">
     <div class="container-fluid">
-      <%= link_to "Katalog Miniatur", 'home', class: "brand" %>
+      <%= link_to "Katalog Miniatur", home_path, class: "brand" %>
       <ul class="nav">        
         <% [:home, :contact, :about, :help].each do |item| -%>
           <%= content_tag(:li, link_to(item.capitalize, eval(item.to_s + "_path")), class: (controller.action_name == item.to_s ? "active" : "")) %>
