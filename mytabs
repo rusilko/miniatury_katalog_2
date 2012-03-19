@@ -1,0 +1,34 @@
+#Written by GNOME Terminal 3.0.1
+
+[GNOME Terminal Configuration]
+Version=1
+CompatVersion=1
+Windows=Window0;
+
+[Window0]
+MenubarVisible=true
+Role=gnome-terminal-window-7165--1721022825-1331664195
+ActiveTerminal=Terminal0xedb000
+Geometry=118x64+841+24
+Terminals=Terminal0xedb000;Terminal0xd2df30;Terminal0xe9c600;
+
+[Terminal0xedb000]
+ProfileID=Profile0
+WorkingDirectory=/home/tomek/rails_projects/miniatury_katalog_2
+Zoom=1
+Width=118
+Height=64
+
+[Terminal0xd2df30]
+ProfileID=Default
+WorkingDirectory=/home/tomek/rails_projects/miniatury_katalog_2
+Zoom=1
+Width=118
+Height=64
+
+[Terminal0xe9c600]
+ProfileID=Default
+WorkingDirectory=/home/tomek/rails_projects/miniatury_katalog_2
+Zoom=1
+Width=118
+Height=64
