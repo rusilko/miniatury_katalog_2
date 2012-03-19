@@ -1,4 +1,6 @@
 ---
-rails.png: rails-782b548cc1ba7f898cdad2d9eb8420d2.png
-application.js: application-9c371edc285cc004c78ba908b3020468.js
-application.css: application-ebc38e5680d7826792dde258bdea3ef8.css
+rails.png: rails.png
+application.js: application.js
+application.css: application.css
+twitter/bootstrap/glyphicons-halflings-white.png: twitter/bootstrap/glyphicons-halflings-white.png
+twitter/bootstrap/glyphicons-halflings.png: twitter/bootstrap/glyphicons-halflings.png
