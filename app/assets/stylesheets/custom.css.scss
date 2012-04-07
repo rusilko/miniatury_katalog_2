@@ -1,0 +1,42 @@
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+/* miscellaneous */
+.centered {
+  text-align: center;
+}
+
+.debug_dump {
+  @include center-block();
+  width: 500px;
+  margin-bottom: 20px;
+}
+
+/* forms */
+
+.sign_up_form {
+  @include center-block();
+  width: 320px;
+}
+
+.sign_up_form input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+#error_explanation {
+  color:#f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+ }

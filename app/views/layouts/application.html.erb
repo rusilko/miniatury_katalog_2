@@ -9,15 +9,12 @@
 <body>
   <%= render 'layouts/header' %>
   <div class="container-fluid">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key%>"><%= value %></div>
+    <% end %>
     <div class="row-fluid">
 
-      <div class="span3">
-        <%= render 'layouts/sidebar' %>
-      </div><!--/span-->
-      
-      <div class="span9">
-        <%= yield %>
-      </div><!--/span-->
+      <%= yield %>
 
     </div><!--/row-->
 
