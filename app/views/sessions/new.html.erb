@@ -1,6 +1,21 @@
 <% provide(:title, "Sign in") %>
 <h1 class="centered">Sign in</h1>
 
+  <%= form_tag sessions_path, class: "sign_up_form" do %>
+
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+
+    <%= submit_tag "Sign in", class: "btn btn-large btn-primary" %>
+
+
+  <% end %>
+
+  <!--  alternative way to do this using form_for instead of form_tag, this is worse because session is not really a resource
+        remeber to change params in controller!
   <%= form_for(:session, url: sessions_path, html: {class: "sign_up_form"}) do |f| %>
 
     <%= f.label :email %>
@@ -11,5 +26,6 @@
 
     <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
   <% end %>
+  -->
 
   <p>New user? <%= link_to "Sign up now!", signup_path %></p>
