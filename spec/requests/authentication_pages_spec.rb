@@ -61,11 +61,7 @@ describe "Authentication" do
         end
 
         describe "submitting to the update action" do
-
-          before do 
-            sign_out if signed_in?
-            put user_path(user)
-          end
+          before { put user_path(user) }
           specify { response.should redirect_to(signin_path) }          
         end
 

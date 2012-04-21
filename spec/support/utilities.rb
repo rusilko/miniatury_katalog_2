@@ -16,13 +16,13 @@ def sign_in(user)
   cookies[:remember_token] = user.remember_token
 end
 
-def sign_out
-  visit root_path
-  click_link "Sign out"
-  # Sign out when not using Capybara as well.
-  cookies[:remember_token] = nil
-end
+# def sign_out
+#   visit root_path
+#   click_link "Sign out"
+#   # Sign out when not using Capybara as well.
+#   cookies[:remember_token] = nil
+# end
 
-def signed_in?
-  cookies[:remember_token] != nil
-end
+# def signed_in?
+#   cookies[:remember_token] != nil
+# end
