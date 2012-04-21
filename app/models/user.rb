@@ -15,17 +15,18 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_secure_password
   before_save :create_remember_token
+  valid_email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :name, 	presence: 	true, 
-  					length:   	{ within: 3..50}
-  
-  regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  
-  validates :email, presence: 	true,
-                    format: 	{ with: regex },
-                    uniqueness: { case_sensitive: false }
+  validates :name,  presence: 	true, 
+  					        length:   	{ within: 3..50}
+      
+  validates :email, presence:    true,
+                    format: 	   { with: valid_email_regex },
+                    uniqueness:  { case_sensitive: false }
 
-  validates :password, length: { minimum: 6 }
+  validates :password,  presence: true,
+                        length:   { minimum: 6 }
+                        
   validates :password_confirmation, presence: true
 
   private
