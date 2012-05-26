@@ -23,7 +23,7 @@ test:
   timeout: 5000
   username: miniatury_katalog_2
   password: tajne
-  
+
 production:
   adapter: postgresql
   encoding: unicode

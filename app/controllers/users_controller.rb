@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update]  
+  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]  
   before_filter :correct_user, only: [:edit, :update]
 
   def index
-    @users = User.all
+    #@users = User.all
+    @users = User.paginate(page: params[:page])
   end
 
   def show
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success]= "Welcome to Katalog!"
-      redirect_to @user
+      redirect_back_or_to @user
     else
       render 'new'
     end
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    #@user = User.find(params[:id])
+    @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile successfuly updated"
       sign_in @user
@@ -42,9 +43,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted."
+    redirect_to users_path
+  end
+
   private
 
-    def signed_in_user
+    def signed_in_user      
       unless signed_in?
         store_location
         redirect_to(signin_path)
