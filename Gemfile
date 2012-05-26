@@ -4,6 +4,9 @@ gem 'rails', '3.2.3'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'pg', '0.12.2'
 gem 'bootstrap-sass', '2.0.0'
+gem 'faker', '1.0.1'
+gem 'will_paginate', '3.0.3'
+gem 'bootstrap-will_paginate', '0.0.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -13,7 +16,10 @@ group :development, :test do
   gem 'rspec-rails', '2.8.1'
   gem 'guard-rspec', '0.5.5'
   gem 'annotate', '~> 2.4.1.beta'
-  gem "guard-livereload"
+  gem 'guard-livereload'
+  gem 'pry'
+  gem 'pry-rails'
+
 end
 
 # Gems used only for assets and not required
