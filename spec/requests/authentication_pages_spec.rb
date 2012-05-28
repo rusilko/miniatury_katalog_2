@@ -4,6 +4,16 @@ describe "Authentication" do
 
   subject { page }
 
+  describe "as non-signed-in user" do
+    
+    let(:user) { FactoryGirl.create(:user) }
+
+    it { should_not have_link('Profile',    href: user_path(user)) }
+    it { should_not have_link('Settings',   href: edit_user_path(user)) }
+    it { should_not have_link('Sign out',   href: signout_path) }
+
+  end
+
   describe "signin page" do
     before { visit signin_path }
     
@@ -83,8 +93,19 @@ describe "Authentication" do
           it "should render the desired protected page" do
             page.should have_selector('title', text: 'Edit user')
           end
-        end
 
+          describe "after signin in again" do
+            before do
+              visit signin_path
+              fill_in "Email",  with: user.email
+              fill_in "Password",   with: user.password
+              click_button "Sign in"
+            end
+            it "should render the default page (profile page)" do
+              page.should have_selector('title', text: full_title(user.name))
+            end
+          end
+        end
       end
     end
 
@@ -99,6 +120,18 @@ describe "Authentication" do
         before { delete user_path(user) }
         specify { response.should redirect_to(root_path) }
       end
+    end
+
+    describe "as admin user" do
+      
+      let(:admin) { FactoryGirl.create(:admin) }
+      before { sign_in(admin) }
+
+      it "admin should not be able to destroy himself" do
+        expect { delete user_path(admin) }.not_to change(User, :count)
+        # expect { click_link('delete') }.to change(User, :count).by(-1)
+      end
+
     end
 
 

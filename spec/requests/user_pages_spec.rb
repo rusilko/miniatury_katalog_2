@@ -49,6 +49,24 @@ describe "UserPages" do
     end
   end
 
+  describe "new and create pages should not be accessible for signed-in users" do
+    let(:user) { FactoryGirl.create(:user) }
+    
+    before do 
+      sign_in user
+      visit new_user_path
+    end 
+
+    specify { response.should redirect_to(root_path) }
+
+    before do
+      sign_in user
+      post users_path
+    end
+    
+    specify { response.should redirect_to(root_path) }
+  end
+
   describe "delete links" do
     
     it { should_not have_link('delete') }
