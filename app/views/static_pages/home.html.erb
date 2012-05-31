@@ -1,14 +1,42 @@
 <% provide(:title, 'Home') %>
 
-<div class="span3">
-  <%= render 'layouts/sidebar' %>
-</div><!--/span-->
+<% if signed_in? %>
 
-<div class="span9">
-  <h1>Katalog Miniatur</h1>
-  <p>Katalog Miniatur</p>
-</div><!--/span-->
+  <aside class="span3">
+  
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+
+    <section>
+      <%= render 'shared/micropost_form' %>
+    </section>
+
+  </aside>
+
+  <div class="span9">
+    <h3>Micropost Feed</h3>
+    <%= render 'shared/feed' %>
+  </div>
+
+<% else %>
+  
+  <div class="center hero-unit">
+    <h1>Welcome to Katalog Miniatur</h1>
+    <h2>
+      This is the home page for the Miniatury Katalog application.
+    </h2>
+
+    <%= link_to "Sign up now!", signup_path, 
+                                class: "btn btn-large btn-primary" %>
+    <%= link_to "Sign in!", signin_path, 
+                                class: "btn btn-large btn-secondary" %>
 
 
+
+  </div>
+
+
+<% end %>
 
 
