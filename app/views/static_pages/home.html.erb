@@ -2,40 +2,11 @@
 
 <% if signed_in? %>
 
-  <aside class="span3">
-  
-    <section>
-      <%= render 'shared/user_info' %>
-    </section>
-
-    <section>
-      <%= render 'shared/micropost_form' %>
-    </section>
-
-  </aside>
-
-  <div class="span9">
-    <h3>Micropost Feed</h3>
-    <%= render 'shared/feed' %>
-  </div>
+  <%= render 'users/home_page' %>
 
 <% else %>
   
-  <div class="center hero-unit">
-    <h1>Welcome to Katalog Miniatur</h1>
-    <h2>
-      This is the home page for the Miniatury Katalog application.
-    </h2>
-
-    <%= link_to "Sign up now!", signup_path, 
-                                class: "btn btn-large btn-primary" %>
-    <%= link_to "Sign in!", signin_path, 
-                                class: "btn btn-large btn-secondary" %>
-
-
-
-  </div>
-
+  <%= render 'static_pages/home_page' %>
 
 <% end %>
 
