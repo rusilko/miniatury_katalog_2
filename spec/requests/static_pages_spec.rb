@@ -16,6 +16,49 @@ describe "StaticPages" do
     let(:heading)    { 'Katalog Miniatur' }
     let(:page_title) { 'Home' }
     it_should_behave_like "all static pages"
+
+    describe "for signed-in users" do
+
+      let(:user) { FactoryGirl.create(:user)}
+      before(:each) do
+        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")     
+        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+        sign_in user
+        visit root_path
+      end
+
+      it "should render the user's feed" do
+        user.feed.each do |item|
+          page.should have_selector("li##{item.id}", text: item.content)
+        end
+      end
+
+      it "should display plural micropost count in the sidebar" do
+        page.should have_content("2 microposts")
+      end 
+
+      it "should display singular micropost count in the sidebar" do
+        user.microposts.first.destroy
+        visit root_path
+        page.should have_content("1 micropost")
+      end      
+
+    end
+
+    describe "microposts pagination" do
+      let(:user) { FactoryGirl.create(:user)}
+      before do 
+        50.times { FactoryGirl.create(:micropost, user: user) }
+        sign_in user
+        visit root_path
+      end
+      after(:all)  { Micropost.delete_all }
+
+      it { should have_link('Next') }
+      its(:html) { should match('>2</a>') }
+
+    end
+
   end
   
   describe "About page" do

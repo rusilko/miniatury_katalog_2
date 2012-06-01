@@ -101,20 +101,43 @@ describe "UserPages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
-    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
-
+    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "FooBar") }
+    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "BarFoo") }
+    
     before { visit user_path(user) }
 
     it { should have_selector('h1', text: user.name) }
-    it { should have_selector('title', text: user.name) }
-  
+    it { should have_selector('title', text: user.name) }  
 
     describe "micropost" do
       it { should have_content(m1.content) }
       it { should have_content(m2.content) }
       it { should have_content(user.microposts.count) }
     end
+
+    describe "microposts pagination" do
+      before do 
+        50.times { FactoryGirl.create(:micropost, user: user) }
+        visit user_path(user) 
+      end
+      after(:all)  { Micropost.delete_all }
+      
+      it { should have_link('Next') }
+      its(:html) { should match('>2</a>') }
+    end
+
+    describe "should not have microposts delete links for other users" do
+      let(:another_user) { FactoryGirl.create(:user) }
+      let!(:m3) { FactoryGirl.create(:micropost, user: another_user, content: "FooBarBaz") }
+      before do
+        sign_in user
+        visit user_path(another_user)
+      end
+      it { should have_content(m3.content) }
+      it { should_not have_link('delete') }
+    end
+
+
 
   end
 

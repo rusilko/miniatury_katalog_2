@@ -1,14 +1,13 @@
 <% provide(:title, 'Home') %>
 
-<div class="span3">
-  <%= render 'layouts/sidebar' %>
-</div><!--/span-->
+<% if signed_in? %>
 
-<div class="span9">
-  <h1>Katalog Miniatur</h1>
-  <p>Katalog Miniatur</p>
-</div><!--/span-->
+  <%= render 'users/home_page' %>
 
+<% else %>
+  
+  <%= render 'static_pages/home_page' %>
 
+<% end %>
 
 
