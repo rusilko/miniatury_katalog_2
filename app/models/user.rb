@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :reverse_relationships, source: :follower 
-    # source here is optional because ails will singularize “followers” 
+    # source here is optional because rails will singularize “followers” 
     # and automatically look for the foreign key follower_id in this case.
     # I’ve kept the :source key to emphasize the parallel structure with the has_many :followed_users
 
@@ -42,7 +42,8 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   def feed
-    Micropost.where("user_id = ?", id) #this is equivalent to microposts
+    #Micropost.where("user_id = ?", id) #this is equivalent to microposts
+    Micropost.from_users_followed_by(self)
   end
 
   def following?(other_user)

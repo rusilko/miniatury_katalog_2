@@ -1,11 +1,20 @@
 MiniaturyKatalog2::Application.routes.draw do
+  get "relationships/create"
+
+  get "relationships/destroy"
+
   get "microposts/create"
 
   get "microposts/destroy"
 
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]  
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   #named routes
   #match '/xxx', to: 'controller#action'
   #xxx_path => '/xxx'
